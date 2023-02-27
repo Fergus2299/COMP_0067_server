@@ -1,0 +1,7 @@
+- express
+- cors
+- mysql2
+- nodemon
+- sequelize 
+- sequelize-cli
+- bcrypt: module for hashing passwords
