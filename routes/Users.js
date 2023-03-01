@@ -19,10 +19,11 @@ router.post("/login", async (req, res) => {
     // find if there is even a user with that email
     const user = await Users.findOne({where: {email: email}});
     // do the hashed passwords match? if so login, else no login
-    !user ? res.json("user doesn't exist!") : () => {
-        bcrypt.compare(password, user.password).then((match) => {
+    if(!user) { res.json("user doesn't exist!")}
+    else {
+        bcrypt.compare(password, user.dataValues.password).then((match) => {
             !match ? res.json("wrong password") : res.json(`logged in`);
-        });
+        })
     };
 });
 
