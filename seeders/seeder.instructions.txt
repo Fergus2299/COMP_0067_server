@@ -1,0 +1,6 @@
+Tutorial for seeders:
+- https://www.youtube.com/watch?v=OPqRXKLLM1I&t=474s
+
+Useful commands:
+- run all seeder files:
+sequelize db:seed:all
