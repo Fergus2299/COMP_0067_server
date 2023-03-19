@@ -5,5 +5,8 @@ module.exports = (sequelize, DataTypes) => {
         },
 
     }, {timestamps:false});
+    Programs.associate = (models) => {
+        Programs.hasMany(models.InternalUsers)
+    }
     return Programs;
 };

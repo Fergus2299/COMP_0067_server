@@ -16,7 +16,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull:false
         },
-    });
+    }, {timestamps:false});
+    InternalUsers.associate = (models) => {
+        InternalUsers.belongsTo(models.Programs, {
+            onDelete: "CASCADE",
+            foreignKey: {
+                allowNull: false
+            },
+
+        })
+    }
 
     return InternalUsers;
 };

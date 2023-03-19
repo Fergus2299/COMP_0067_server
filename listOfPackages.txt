@@ -8,3 +8,6 @@ I've not included the node_packages dir in this repo so these are all the packag
 - sequelize   : ORM for interacting with the database
 - sequelize-cli
 - bcrypt    : module for hashing passwords
+
+
+followed tutorial: https://www.bezkoder.com/node-js-jwt-authentication-mysql/ 

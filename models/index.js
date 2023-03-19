@@ -37,15 +37,6 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-// Inserting the initial program data
-// db.Programs.bulkCreate([
-//   {name: "su"},
-//   {name: "machine_learning"},
-//   {name: "statistical_comp"},
-//   {name: "core_cs"},
-//   {name: "ai"},
-// ]);
-// console.log(db.Programs);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
