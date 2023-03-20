@@ -2,5 +2,9 @@ Tutorial for seeders:
 - https://www.youtube.com/watch?v=OPqRXKLLM1I&t=474s
 
 Useful commands:
+- make seeder files
+npx sequelize-cli seed:generate --name demo-user
+- run seeder files
+sequelize db:seed --seed 20230316232610-programs-seeder.js
 - run all seeder files:
 sequelize db:seed:all
