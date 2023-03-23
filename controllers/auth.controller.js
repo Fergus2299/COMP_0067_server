@@ -1,49 +1,32 @@
 const db = require("../models");
 const config = require("../config/auth.config");
-const User = db.user;
-const Role = db.role;
+const ExternalUsers = db.ExternalUsers;
+const InternalUsers = db.InternalUsers;
+
 
 const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
+var bcrypt = require("bcrypt");
 
-exports.signup = (req, res) => {
+// only for external users (for now)
+exports.signup = (req, res, next) => {
   // Save User to Database
-  User.create({
-    username: req.body.username,
-    email: req.body.email,
-  })
-    .then(user => {
-      if (req.body.roles) {
-        Role.findAll({
-          where: {
-            name: {
-              [Op.or]: req.body.roles
-            }
-          }
-        }).then(roles => {
-          user.setRoles(roles).then(() => {
-            res.send({ message: "User was registered successfully!" });
-          });
-        });
-      } else {
-        // user role = 1
-        user.setRoles([1]).then(() => {
-          res.send({ message: "User was registered successfully!" });
-        });
-      }
+  const {email,password} = req.body;
+  bcrypt.hash(password, 10).then((hash) => {
+    ExternalUsers.create({email: email, password:hash});
+      res.json(`User successfully created`);    
+      next();
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
-    ExternalUsers.create()
 };
-
-exports.signin = (req, res) => {
-  User.findOne({
+// only for external users (for now)
+exports.externalsignin = (req, res) => {
+  ExternalUsers.findOne({
     where: {
-      username: req.body.username
+      email: req.body.email
     }
   })
     .then(user => {
@@ -63,24 +46,46 @@ exports.signin = (req, res) => {
         });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      var token = jwt.sign({ id: user.id, role: "ROLE_ExternalUser" }, config.secret, {
         expiresIn: 86400 // 24 hours
       });
 
-      var authorities = [];
-      user.getRoles().then(roles => {
-        for (let i = 0; i < roles.length; i++) {
-          authorities.push("ROLE_" + roles[i].name.toUpperCase());
-        }
+      // var authorities = ["ROLE_ExternalUser"];
+
         res.status(200).send({
           id: user.id,
-          username: user.username,
           email: user.email,
-          roles: authorities,
+          role: "ROLE_ExternalUser",
           accessToken: token
         });
+      })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+};
+
+// only for external users (for now)
+exports.internalsignin = (req, res) => {
+  InternalUsers.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "User Not found." });
+      }
+
+      var token = jwt.sign({ id: user.id,role:"ROLE_InternalUser" }, config.secret, {
+        expiresIn: 86400 // 24 hours
       });
-    })
+        res.status(200).send({
+          id: user.id,
+          email: user.email,
+          role: "ROLE_InternalUser",
+          accessToken: token
+        });
+      })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });

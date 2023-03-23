@@ -3,7 +3,6 @@ const app = express();
 
 app.use(express.json());
 const db = require('./models');
-const {Programs} = require('./models')
 
 
 const cors = require("cors");
@@ -13,9 +12,15 @@ app.use(cors({
     origin:'*'
 }));
 
-// routes
-const userRouter = require('./routes/Users');
-app.use("/users", userRouter);
+// // routes
+// const userRouter = require('./routes/Users');
+// app.use("/users", userRouter);
+
+const authRouter = require('./routes/auth.routes');
+app.use("/auth", authRouter);
+
+const userRouter = require('./routes/user.routes');
+app.use("/user", userRouter);
 
 // we will always recreate the tables before the server is started
 db.sequelize.sync().then(() => {
@@ -23,11 +28,3 @@ db.sequelize.sync().then(() => {
         console.log("Server running on port 4000");
     }); 
 });
-
-// Programs.bulkCreate([
-//   {name: "su"},
-//   {name: "machine_learning"},
-//   {name: "statistical_comp"},
-//   {name: "core_cs"},
-//   {name: "ai"},
-// ],{updateOnDuplicate:["name"]});

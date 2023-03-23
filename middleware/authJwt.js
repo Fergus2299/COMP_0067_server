@@ -1,9 +1,12 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
 const db = require("../models");
-const Users = db.users;
+const InternalUsers = db.InternalUsers;
+const ExternalUsers = db.ExternalUsers;
+
 
 verifyToken = (req, res, next) => {
+  console.log(req.headers);
   let token = req.headers["x-access-token"];
 
   if (!token) {
@@ -18,14 +21,16 @@ verifyToken = (req, res, next) => {
         message: "Unauthorized!"
       });
     }
+    req.role = decoded.role;
     req.userId = decoded.id;
     next();
   });
 };
 
+// assumes internal user
 isAdmin = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
-    if(user.program_group === 0) {
+  InternalUsers.findByPk(req.userId).then(user => {
+    if(user.ProgramId === 0) {
       // then they are an admin
       next();
       return;
@@ -36,9 +41,24 @@ isAdmin = (req, res, next) => {
     return;
   })
 };
-  
+// assumes internal user
+isAcademic = (req, res, next) => {
+  InternalUsers.findByPk(req.userId).then(user => {
+    if(user.ProgramId != 0) {
+      // then they are an Academic
+      next();
+      return;
+    };
+    res.status(403).send({
+      message: "Require Admin Role!"
+    });
+    return;
+  })
+};
 const authJwt = {
   verifyToken: verifyToken,
   isAdmin: isAdmin,
+  isAcademic: isAcademic,
 };
+
 module.exports = authJwt;

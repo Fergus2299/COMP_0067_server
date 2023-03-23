@@ -10,15 +10,15 @@ module.exports = (sequelize, DataTypes) => {
         },
         firstname: {
             type: DataTypes.STRING,
-            allowNull:false
+            allowNull:true
         },
         lastname: {
             type: DataTypes.STRING,
-            allowNull:false
+            allowNull:true
         },
         subject: {
             type: DataTypes.STRING,
-            allowNull:false
+            allowNull:true
         },
         company: {
             type: DataTypes.STRING,
