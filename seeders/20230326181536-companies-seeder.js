@@ -1,5 +1,6 @@
 'use strict';
 const Companies = require("../create/CompaniesData");
+console.log(Companies);
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {

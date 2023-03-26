@@ -35,7 +35,8 @@ module.exports = (sequelize, DataTypes) => {
 
         })
     }
-
-
+    ExternalUsers.associate = (models) => {
+        ExternalUsers.hasMany(models.Projects)
+    }
     return ExternalUsers;
 };

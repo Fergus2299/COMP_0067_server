@@ -2,7 +2,7 @@
 
 var bcrypt = require("bcrypt");
 const ExternalUsersData = require("../create/ExternalUsersData");
-  
+console.log(ExternalUsersData);
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
