@@ -10,9 +10,9 @@ module.exports = {
     var hash = await bcrypt.hash(ExternalUsersData[0].password, 10);
     ExternalUsersData[0].password = hash;
     
-    return queryInterface.bulkInsert('externalusers', ExternalUsersData);
+    return queryInterface.bulkInsert('ExternalUsers', ExternalUsersData);
   },
   async down (queryInterface, Sequelize) {
-      return queryInterface.bulkDelete('externalusers',{}, null);
+      return queryInterface.bulkDelete('ExternalUsers',{}, null);
   }
 };

@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "IXN_PM_System",
+    "database": "ixn_pm_system",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

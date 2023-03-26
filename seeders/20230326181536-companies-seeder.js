@@ -4,9 +4,9 @@ const Companies = require("../create/CompaniesData");
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-    return queryInterface.bulkInsert('companies', Companies);
+    return queryInterface.bulkInsert('Companies', Companies);
   },
   async down (queryInterface, Sequelize) {
-      return queryInterface.bulkDelete('companies',{}, null);
+      return queryInterface.bulkDelete('Companies',{}, null);
   }
 };

@@ -5,9 +5,9 @@ console.log(InternalUsersData);
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-    return queryInterface.bulkInsert('internalusers', InternalUsersData);
+    return queryInterface.bulkInsert('InternalUsers', InternalUsersData);
   },
   async down (queryInterface, Sequelize) {
-      return queryInterface.bulkDelete('internalusers',{}, null);
+      return queryInterface.bulkDelete('InternalUsers',{}, null);
   }
 };
