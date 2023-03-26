@@ -22,6 +22,10 @@ app.use("/auth", authRouter);
 const userRouter = require('./routes/user.routes');
 app.use("/user", userRouter);
 
+const projectRouter = require('./routes/project.routes');
+app.use("/projects", projectRouter);
+
+
 // we will always recreate the tables before the server is started
 db.sequelize.sync().then(() => {
     app.listen(4000, () => {
