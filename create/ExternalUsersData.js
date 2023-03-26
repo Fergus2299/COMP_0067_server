@@ -6,7 +6,6 @@ const ExternalUsersData = [{
     firstname:"mark",
     lastname:"zuckerberg", 
     subject:"mr",
-    company:"mr",
-
+    CompanyId:1,
   }]
   module.exports = ExternalUsersData;

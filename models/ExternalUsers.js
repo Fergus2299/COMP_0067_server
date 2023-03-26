@@ -20,11 +20,22 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull:true
         },
-        company: {
-            type: DataTypes.STRING,
-            allowNull:true
-        },
+        // company: {
+        //     type: DataTypes.STRING,
+        //     allowNull:true
+        // },
     }, {timestamps:false});
+
+    ExternalUsers.associate = (models) => {
+        ExternalUsers.belongsTo(models.Companies, {
+            onDelete: "CASCADE",
+            foreignKey: {
+                allowNull: false
+            },
+
+        })
+    }
+
 
     return ExternalUsers;
 };

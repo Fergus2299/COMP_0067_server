@@ -82,6 +82,7 @@ exports.internalsignin = (req, res) => {
         res.status(200).send({
           id: user.id,
           email: user.email,
+          firstname: user.firstname,
           role: "ROLE_InternalUser",
           accessToken: token
         });
