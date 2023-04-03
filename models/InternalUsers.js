@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull:false
         },
+        InternalUserType:{
+            type: DataTypes.BIGINT
+        }
     }, {timestamps:false});
     InternalUsers.associate = (models) => {
         InternalUsers.belongsTo(models.Programs, {

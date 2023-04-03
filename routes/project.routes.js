@@ -3,6 +3,7 @@ const router = express.Router();
 // this posts instance is an object in the same format as in the posts file in models directory
 const {Projects} = require("../models");
 const {authJwt} = require("../middleware");
+const controller = require("../controllers/project.controller");
 
 
 router.get("/externaluser/:externaluserId", async(req, res) => {
@@ -24,4 +25,17 @@ async (req, res) => {
     res.json({result: 'success'});
 });
 
+router.post(
+    '/projectform',
+    controller.receiveForm
+)
+
+router.post(
+    '/editaftersave',
+    controller.editAfterSave
+)
+router.post(
+    "/submit",
+    controller.submitProject
+)
 module.exports = router;

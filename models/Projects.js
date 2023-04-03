@@ -5,7 +5,59 @@
 // we need to ask wei about this
 module.exports = (sequelize, DataTypes) => {
     const Projects = sequelize.define("Projects", {
-        name: {
+        orgName: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        supName: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        supEmail: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        supTitle: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        desAbstract: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        challenges: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        dataInfo1: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        dataInfo2: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },        
+        dataInfo3: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },        
+        dataInfo4: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },        
+        dataInfo5: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        dataProcessing: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        skillsRequired: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        desDetailed: {
             type: DataTypes.STRING,
             allowNull:false
         },
@@ -26,6 +78,14 @@ module.exports = (sequelize, DataTypes) => {
             allowNull:true
         },
         fileAddress: {
+            type: DataTypes.STRING,
+            allowNull:true
+        },
+        status: {
+            type: DataTypes.STRING,
+            allowNull:true
+        },
+        programme: {
             type: DataTypes.STRING,
             allowNull:true
         },

@@ -25,6 +25,10 @@ router.get(
   controller.adminBoard,
 );
 
-
+// Bohong
+router.get(
+  "/test/adminSSO",
+  controller.receiveInfo,
+)
 
 module.exports = router;
